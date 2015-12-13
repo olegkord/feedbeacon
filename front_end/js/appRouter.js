@@ -2,7 +2,7 @@ angular.module('FeedBeacon',[
   'ui.router'
 ])
   .config(AppRouter);
-  
+
   function AppRouter($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/home")
 
