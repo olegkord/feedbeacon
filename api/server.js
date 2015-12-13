@@ -1,12 +1,15 @@
 'use strict'
 
-const express = require('express');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-const app = express();
+let express = require('express');
+let path = require('path');
+let cors = require('cors');
+let logger = require('morgan');
+let bodyParser = require('body-parser');
+let app = express();
+
 
 //noSQL database:
-const mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/feedbeacon');
 
 let db = mongoose.connection;
@@ -17,17 +20,24 @@ db.once('open', (callback) => {
 //end db
 
 
+
 //set up back end routes:
-const routes = require('./config/routes');
+let routes = require('./config/routes');
+//end routes
+
+// app.use('/user', user);
+app.use(cors());
+
+//set up body parsing and logging
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-//end routes
+//end logging
 
+app.use(routes);
 //perhaps add static dependencies here:
-
 //end static dependencies
 
-cons server = app.listen(3000, () => {
+let server = app.listen(3000, () => {
   console.log('server running');
 })
