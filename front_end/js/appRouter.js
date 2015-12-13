@@ -19,7 +19,7 @@ angular.module('FeedBeacon')
       })
       .state('login', {
         url: '/login/user',
-        templateUrl: 'js/templates/loginUser.html'
+        templateUrl: 'js/templates/loginUser.html',
       })
       .state('login_restaurant', {
         url: '/login/restaurant',

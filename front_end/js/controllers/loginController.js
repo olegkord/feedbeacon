@@ -1,17 +1,19 @@
 'use strict';
-angular.module('FeedBeacon')
-  .controller('LoginController', LoginController);
+  LoginController.$inject = ['$http'];
 
-  UsersController.$inject = ['$http'];
-
-  console.log('login controller laoded');
+  console.log('login controller loaded');
   function LoginController(){
     let self = this;
 
     self.all = [];
     self.loginUser = {};
 
-    function signIn() {
+    self.signIn = function() {
       console.log('logging in user!');
     }
+
+//debug purposes only.
+    // this.fart = function() {
+    //   console.log('This is sad.');
+    // }
   }

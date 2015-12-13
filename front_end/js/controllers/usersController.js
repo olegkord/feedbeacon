@@ -1,7 +1,4 @@
 'use strict';
-angular.module('FeedBeacon')
-  .controller('UsersController', UsersController);
-
   UsersController.$inject = ['$http'];
 
   console.log('usercontroller loaded!');
