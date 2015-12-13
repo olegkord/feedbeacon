@@ -1,30 +1,28 @@
-angular.module('FeedBeacon',[
-  'ui.router'
-])
+angular.module('FeedBeacon')
   .config(AppRouter);
 
   function AppRouter($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/home")
 
     $stateProvider
+      .state('home', {
+        url: '/home',
+        templateUrl: 'js/templates/home.html'
+      })
       .state('signup', {
-        url: '/signup',
-        templateUrl: '../templates/signup.html'
+        url: '/signup/user',
+        templateUrl: 'js/templates/signupUser.html'
+      })
+      .state('signup_restaurant', {
+        url: '/signup/restaurant',
+        templateUrl: 'js/templates/signupRestaurant.html'
       })
       .state('login', {
-        url: '/login',
-        templateUrl: '../templates/login.html'
-      })
-      .state('login_user', {
         url: '/login/user',
-        templateUrl: '../templates/loginUser.html'
+        templateUrl: 'js/templates/loginUser.html'
       })
       .state('login_restaurant', {
         url: '/login/restaurant',
-        templateUrl: '../templates/loginRestaurant.html'
-      })
-      .state('about', {
-        url: '/about',
-        templateUrl: 'about.html'
+        templateUrl: 'js/templates/loginRestaurant.html'
       })
   }
