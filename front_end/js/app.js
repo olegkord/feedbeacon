@@ -3,3 +3,5 @@ angular.module('FeedBeacon',[
 ])
   .controller('UsersController', UsersController)
   .controller('LoginController', LoginController);
+
+  UsersController.$inject = ['$http'];

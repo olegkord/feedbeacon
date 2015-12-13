@@ -2,32 +2,32 @@
   <form class="add-user" ng-submit="user.addUser()">
     <div class="row">
       <div class="input-field col s6">
-        <input placeholder="userName123" ng-model="user.userName" type="text" class="validate">
+        <input placeholder="userName123" ng-model="user.newUser.userName" type="text" class="validate">
         <label for="userName">userName</label>
       </div>
       <div class="input-field col s6">
-        <input placeholder="email@abc.def" ng-model="user.email" type="email" class="validate">
+        <input placeholder="email@abc.def" ng-model="user.newUser.email" type="email" class="validate">
         <label for="email">Email</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input placeholder="thai, sushi, burgers, etc." ng-model="user.foodTypes" type="text" class="validate">
+        <input placeholder="thai, sushi, burgers, etc." ng-model="user.newUser.foodTypes" type="text" class="validate">
         <label for="foodTypes">Favorite Cuisines</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input ng-model="user.passwordConfirmation" type="password" class="validate">
+        <input ng-model="user.newUser.password" type="password" class="validate">
         <label for="passwordConfirmation">Password</label>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="input-field col s12">
         <input ng-model="user.passwordConfirmation" type="password" class="validate">
         <label for="passwordConfirmation">Password</label>
       </div>
-    </div>
+    </div> -->
       <button type="submit" class="btn waves-effect waves-light" value="Add User">sign up
         <i class="material-icons right">done</i>
       </button>

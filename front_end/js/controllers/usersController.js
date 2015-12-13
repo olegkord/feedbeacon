@@ -1,14 +1,16 @@
 'use strict';
-  UsersController.$inject = ['$http'];
 
   console.log('usercontroller loaded!');
 
   function UsersController($http) {
+    $http.defaults.useXDomain = true;
+    delete $http.defaults.headers.common['X-Requested-With'];
+
     let self = this;
 
     self.all = [];
 
-    self.newUser = {};
+    self.newUser = {}
 
     //self.updateUser = updateUser;
     //self.deleteUser = deleteUser;
@@ -16,12 +18,21 @@
 //class methods:
     self.addUser = function() {
       console.log('adding a user!');
-      $http
-        .post('http://localhost:3000/users', self.newUser)
-        .then( (response) => {
-          getUsers();
-        });
-        self.newUser = {};
+      self.newUser.foodTypes.split(',');
+      $http({
+        method: 'POST',
+        url: 'http://localhost:3000/user',
+        data: self.newUser,
+        headers: {'Content-Type': 'application/json'}
+      });
+        // .post('http://localhost:3000/user', self.newUser)
+        // .then( (response) => {
+        //   getUsers();
+        // });
+    }
+
+    self.getUsers = function() {
+
     }
 
     self.updateUser = function() {
