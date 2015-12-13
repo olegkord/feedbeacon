@@ -1,24 +1,24 @@
 'use strict';
 
 let mongoose = require('mongoose');
-let bcrypr = require('bcrypt');
+let bcrypt = require('bcrypt');
 
 let userSchema = new mongoose.Schema({
   userName: String,
   email: String,
   password: String,
-
+  foodTypes: [String],
   created_at: Date,
   updated_at: Date
 });
 
 //middleware
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function(next) {
   let user = this;
-
+debugger;
   if(!user.isModified('password')) return next();
 
-  bcypt.genSalt(5, (err,salt) => {
+  bcrypt.genSalt(5, (err,salt) => {
     if (err) return next(err);
     bcrypt.hash(user.password, salt, (error,hash) => {
       if(error) return next(error);

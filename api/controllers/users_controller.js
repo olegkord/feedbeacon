@@ -19,9 +19,11 @@ function getAll(req,res) {
 //Post
 function newUser(req,res) {
   console.log('hit create new user route');
+
   let user = new User(req.body);
 
   user.save( (error) => {
+    debugger;
     if (error) res.json({message: 'Could not create new user because of:' + error});
 
     res.json(user);
