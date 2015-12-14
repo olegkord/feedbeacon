@@ -7,6 +7,11 @@ const jwt = require('jsonwebtoken');
 const secret = 'omgwtfbbq'
 
 //GET
+function getUser(req,res) {
+  console.log('getting a user')
+
+}
+
 function getAll(req,res) {
   console.log('hit get all users route');
   User.find( (error,users) => {
@@ -33,7 +38,7 @@ function newUser(req,res) {
 function loginUser(req, res) {
   console.log('hit log in user route');
   let userParams = req.body;
-
+  debugger;
   User.findOne({email: userParams.email}, (err,user) => {
     if (err) throw err;
 
@@ -42,7 +47,7 @@ function loginUser(req, res) {
 
       if (isMatch) {
         let token = jwt.sign(user, secret, {expiresIn: 1444000});
-
+        debugger;
         res.json({
           success: true,
           message: 'Authorization successful',
@@ -72,5 +77,7 @@ function logoutUser(req,res) {
 module.exports = {
   getAll: getAll,
   loginUser: loginUser,
-  newUser: newUser
+  newUser: newUser,
+  auth: auth,
+  getUser: getUser
 }

@@ -6,6 +6,9 @@ let methodOverride = require('method-override');
 
 let users_controller = require('../controllers/users_controller');
 
+router.route('/user/login')
+  .post(users_controller.loginUser);
+
 //router middleware for token authentication
 router.use( (req, res, next) => {
   console.log('verifying token');
@@ -35,12 +38,12 @@ router.route('/user')
 
   //Post a new criminal
   .post(users_controller.newUser);
-router.route('/user/authenticate');
-  .get(users_controller.auth);
-  
-router.route('/user/login')
-  .post(users_controller.loginUser);
 
-router.router('/user/:id')
+router.route('/user/authenticate')
+  .get(users_controller.auth);
+
+
+router.route('/user/:id')
   .get(users_controller.getUser)
+
 module.exports = router;
