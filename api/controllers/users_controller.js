@@ -30,7 +30,47 @@ function newUser(req,res) {
   });
 }
 
+function loginUser(req, res) {
+  console.log('hit log in user route');
+  let userParams = req.body;
+
+  User.findOne({email: userParams.email}, (err,user) => {
+    if (err) throw err;
+
+    user.authenticate(userParams.password, (error, isMatch) => {
+      if (error) throw error;
+
+      if (isMatch) {
+        let token = jwt.sign(user, secret, {expiresIn: 1444000});
+
+        res.json({
+          success: true,
+          message: 'Authorization successful',
+          user: user,
+          token: token
+        });
+      }
+      else {
+        return res.status(401).send({message: 'unauthorized access'})
+      }
+    });
+  });
+}
+
+function auth(req,res) {
+  console.log('Authenticating user HTTP header token');
+  return res.status(200).send({message:'Token OK'});
+}
+
+function logoutUser(req,res) {
+  console.log('hit user logout route');
+  let userParams = req.body;
+
+
+}
+
 module.exports = {
   getAll: getAll,
+  loginUser: loginUser,
   newUser: newUser
 }
