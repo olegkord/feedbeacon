@@ -1,14 +1,14 @@
-<div ng-controller="LoginController as login" class="valign center-block">
+<div ng-controller="UsersController as login" class="valign center-block">
   <form >
     <div class="row">
       <div class="input-field col s6">
-        <input ng-model="login.email" placeholder="email@abc.def" id="email" type="text" class="validate">
+        <input ng-model="login.loginUser.email" placeholder="email@abc.def" id="email" type="text" class="validate">
         <label for="email">Email</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s6">
-        <input ng-model="login.password" id="password" type="password" class="validate">
+        <input ng-model="login.loginUser.password" id="password" type="password" class="validate">
         <label for="password">Password</label>
       </div>
     </div>

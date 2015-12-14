@@ -7,17 +7,35 @@
     delete $http.defaults.headers.common['X-Requested-With'];
 
 
-
     let self = this;
 
     self.all = [];
 
-    self.newUser = {}
+    self.loginUser = {};
+    self.newUser = {};
 
     //self.updateUser = updateUser;
     //self.deleteUser = deleteUser;
 
 //class methods:
+    self.signIn = function() {
+      console.log('logging in user!');
+      $http({
+        method: 'POST',
+        url: 'http://localhost:3000/user/login',
+        data: self.loginUser,
+        headers: {'Content-Type': 'application/json'}
+      }).then( (user) => {
+        self.currentUser = user.data;
+        $state.go('user_show', {id: user.data._id});
+      })
+    },
+
+    self.signOut = function() {
+      console.log('signing out user!');
+
+    }
+
     self.addUser = function() {
       console.log('adding a user!');
       self.newUser.foodTypes.split(',');
@@ -27,7 +45,6 @@
         data: self.newUser,
         headers: {'Content-Type': 'application/json'}
       }).then( (user) => {
-        console.log(user.data);
         self.currentUser = user.data;
         $state.go('user_show', {id: user.data._id});
       });
