@@ -29,6 +29,11 @@ angular.module('FeedBeacon')
       })
       .state('user_show', {
         url: '/user/:id',
-        templateUrl: 'js/templates/userProfile.html'
+        templateUrl: 'js/templates/userProfile.html',
+        resolve: {
+          testFcn: function() {
+            return {value: 'simple!'}
+          }
+        }
       })
   }

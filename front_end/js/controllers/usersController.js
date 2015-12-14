@@ -24,7 +24,7 @@
          headers: {'Content-Type': 'application/json'}
        }).then( (data) => {
          self.currentUser = data.data.user;
-         $http.defaults.headers.common.Authorization = data.data.token;
+         $http.defaults.headers.common.authorization = data.data.token;
          $rootScope.currentUser = data.data.user;
          $state.go('user_show', {id: data.data.user._id});
        })
@@ -39,7 +39,7 @@
       self.newUser.foodTypes.split(',');
       $http({
         method: 'POST',
-        url: 'http://localhost:3000/user',
+        url: 'http://localhost:3000/user/new',
         data: self.newUser,
         headers: {'Content-Type': 'application/json'}
       }).then( (user) => {
