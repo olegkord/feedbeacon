@@ -2,6 +2,8 @@ angular.module('FeedBeacon')
   .config(AppRouter);
 
   function AppRouter($stateProvider, $urlRouterProvider) {
+
+
     $urlRouterProvider.otherwise("/home")
 
     $stateProvider
@@ -24,5 +26,9 @@ angular.module('FeedBeacon')
       .state('login_restaurant', {
         url: '/login/restaurant',
         templateUrl: 'js/templates/loginRestaurant.html'
+      })
+      .state('user_show', {
+        url: '/user/:id',
+        templateUrl: 'js/templates/userProfile.html'
       })
   }

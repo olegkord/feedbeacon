@@ -2,9 +2,11 @@
 
   console.log('usercontroller loaded!');
 
-  function UsersController($http) {
+  function UsersController($http,$state) {
     $http.defaults.useXDomain = true;
     delete $http.defaults.headers.common['X-Requested-With'];
+
+
 
     let self = this;
 
@@ -24,11 +26,11 @@
         url: 'http://localhost:3000/user',
         data: self.newUser,
         headers: {'Content-Type': 'application/json'}
+      }).then( (user) => {
+        console.log(user.data);
+        self.currentUser = user.data;
+        $state.go('user_show', {id: user.data._id});
       });
-        // .post('http://localhost:3000/user', self.newUser)
-        // .then( (response) => {
-        //   getUsers();
-        // });
     }
 
     self.getUsers = function() {

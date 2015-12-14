@@ -1,7 +1,8 @@
 angular.module('FeedBeacon',[
-  'ui.router'
+  'ui.router',
 ])
   .controller('UsersController', UsersController)
   .controller('LoginController', LoginController);
 
-  UsersController.$inject = ['$http'];
+  UsersController.$inject = ['$http','$state'];
+  //UsersController.$inject = ['$location'];
