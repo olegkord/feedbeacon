@@ -4,4 +4,3 @@ angular.module('FeedBeacon',[
   .controller('UsersController', UsersController);
 
   UsersController.$inject = ['$http','$state','$rootScope'];
-  //UsersController.$inject = ['$location'];

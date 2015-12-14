@@ -3,10 +3,6 @@
   console.log('usercontroller loaded!');
 
   function UsersController($http,$state,$rootScope) {
-    $http.defaults.useXDomain = true;
-    delete $http.defaults.headers.common['X-Requested-With'];
-
-
 
     let self = this;
 
