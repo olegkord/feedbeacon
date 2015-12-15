@@ -1,12 +1,23 @@
 <div ng-controller="UsersController as profile" class="z-depth-1">
   <h3>I Like:</h3>
-    <span ng-repeat="food in profile.getCurrentUserLikes() track by $index">
-      <div class="chip">
-        {{food}}
-      </div>
-    </span>
+  <span ng-repeat="food in profile.getCurrentUserLikes() track by $index">
+    <div class="chip">
+      {{food}}
+      <i class="material-icons">close</i>
+    </div>
+    &nbsp;
+  </span>
+  <div class="row">
+    <div class="input-field col s2">
+      <span><input id="profile.newFood" type="text" class="validate">
+      <label class="active" for="profile.newFood">New Like</label>
+      <a type="submit" class="btn waves-effect waves-light" name="action">
+        add
+      </a></span>
+    </div>
+  </div>
 </div>
--------------------------
+
 <div class="s12 m4 l8">
   <div class="row">
     <h3 class="">Feed Me!<h3>
