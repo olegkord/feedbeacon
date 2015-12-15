@@ -4,7 +4,7 @@ let User = require('../models/user');
 
 const expressJwt = require('express-jwt');
 const jwt = require('jsonwebtoken');
-const secret = 'omgwtfbbq'
+const secret = 'posholnahuisuka'
 
 //GET
 function getUser(req,res) {
@@ -38,7 +38,7 @@ function newUser(req,res) {
 function loginUser(req, res) {
   console.log('hit log in user route');
   let userParams = req.body;
-  debugger;
+
   User.findOne({email: userParams.email}, (err,user) => {
     if (err) throw err;
 

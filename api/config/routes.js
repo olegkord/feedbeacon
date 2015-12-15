@@ -18,12 +18,12 @@ router.route('/user/new')
 //router middleware for token authentication
 router.use( (req, res, next) => {
   console.log('verifying token');
-  debugger;
+
   let token = req.headers.authorization;
 
   //decode token
   if (token) {
-    jwt.verify(token, secret, (err, decoded) => {
+    jwt.verify(token, secret, function(err, decoded) {
       debugger;
       if (err) res.status(401).json({message: "token was not authorized"})
 
