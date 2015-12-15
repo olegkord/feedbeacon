@@ -24,17 +24,4 @@ angular.module('FeedBeacon',[
     })
   }]);
 
-
-  // .service(['User', '$http', function() {
-  //   service = this;
-  //
-  //   service.authenticate = function($http) {
-  //     $http({
-  //       method: 'GET',
-  //       url: 'http://localhost:3000/auth'
-  //     }).then( (response) => {
-  //       return response
-  //     })
-  //   }
-  // }])
   UsersController.$inject = ['$rootScope','$state','$http','User'];
