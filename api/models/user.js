@@ -30,6 +30,7 @@ debugger;
 });
 
 userSchema.methods.authenticate = function(password,callback) {
+  debugger;
   bcrypt.compare(password, this.password, (err, isMatch) => {
     callback(null, isMatch);
   });

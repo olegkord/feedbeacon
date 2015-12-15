@@ -28,7 +28,6 @@ function newUser(req,res) {
   let user = new User(req.body);
 
   user.save( (error) => {
-    debugger;
     if (error) res.json({message: 'Could not create new user because of:' + error});
 
     res.json(user);
@@ -40,11 +39,14 @@ function loginUser(req, res) {
   let userParams = req.body;
 
   User.findOne({email: userParams.email}, (err,user) => {
+
     if (err) throw err;
 
     user.authenticate(userParams.password, (error, isMatch) => {
+      debugger;
       if (error) throw error;
 
+      debugger;
       if (isMatch) {
         let token = jwt.sign(user, secret, {expiresIn: 1444000});
         debugger;
@@ -67,12 +69,6 @@ function auth(req,res) {
   return res.status(200).send({message:'Token OK'});
 }
 
-function logoutUser(req,res) {
-  console.log('hit user logout route');
-  let userParams = req.body;
-
-
-}
 
 module.exports = {
   getAll: getAll,

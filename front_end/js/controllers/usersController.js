@@ -1,63 +1,59 @@
 'use strict';
 
-  console.log('usercontroller loaded!');
+console.log('usercontroller loaded!');
 
-  function UsersController($rootScope, $state, $http, User) {
+function UsersController($rootScope, $state, $http, User) {
 
-    let self = this;
+  let self = this;
 
 
-    self.all = [];
+  self.all = [];
 
-    self.newUser = {};
-    self.logInUser = {};
-    self.currentUser = {};
-    //self.updateUser = updateUser;
-    //self.deleteUser = deleteUser;
+  self.newUser = {};
+  self.logInUser = {};
 
 //class methods:
-  self.signIn = function(user) {
-    // LoginService.login(user)
-    //   .then( (response) => {
-    //     user.access_token = response.data.id;
-    //     self.currentUser = user
-    //   });
-
-
-     console.log('logging in user!');
-     $http({
-       method: 'POST',
-       url: 'http://localhost:3000/user/login',
-       data: self.logInUser,
-       headers: {'Content-Type': 'application/json'}
-     }).then( (data) => {
-       User.isLoggedIn = true;
-      //  self.currentUser = data.data.user;
-      //  $http.defaults.headers.common.authorization = data.data.token;
-      //  $rootScope.currentUser = data.data.user;
-       $state.go('user_show', {id: data.data.user._id});
-     })
-
-   },
-
-    self.addUser = function(user) {
-      console.log('adding a user!');
-      // LoginService.register(user)
-      //   .then( (response) => {
-      //     login(user);
-      //   });
-      self.newUser.foodTypes.split(',');
-      $http({
-        method: 'POST',
-        url: 'http://localhost:3000/user/new',
-        data: self.newUser,
-        headers: {'Content-Type': 'application/json'}
-      }).then( (user) => {
-        console.log(user.data);
-        $rootScope.currentUser = user.data;
-        $state.go('user_show', {id: user.data._id});
-      });
+  self.signIn = function() {
+    console.log('logging in user!');
+    if (Object.keys(self.logInUser)) {
+      User.userForLogin = self.logInUser;
     }
+    $http({
+      method: 'POST',
+      url: 'http://localhost:3000/user/login',
+      data: User.userForLogin,
+      headers: {'Content-Type': 'application/json'}
+    }).then( (data) => {
+      User.isLoggedIn = true;
+      User.currentUser = data.data.user;
+      $http.defaults.headers.common.Authorization = data.data.token;
+      $state.go('user_show', {id: data.data.user._id});
+    })
+  },
+
+  self.signOut = function(user) {
+    console.log('logging out user!');
+    $http.defaults.headers.common.Authorization = '';
+    User.isLoggedIn = false;
+    User.currentUser = {};
+    User.userForLogin = {};
+    $state.go('home');
+  }
+
+
+
+  self.addUser = function(user) {
+    console.log('adding a user!');
+    self.newUser.foodTypes.split(',');
+    $http({
+      method: 'POST',
+      url: 'http://localhost:3000/user/new',
+      data: self.newUser,
+      headers: {'Content-Type': 'application/json'}
+    }).then( (user) => {
+      $state.go('login');
+    });
+  }
 
     self.getUsers = function() {
 

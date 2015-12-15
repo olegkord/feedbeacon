@@ -33,4 +33,3 @@ angular.module('FeedBeacon')
         data: {requiresLogin: true}
       })
     }
-  

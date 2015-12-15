@@ -2,11 +2,14 @@
 
 angular.module('FeedBeacon',[
   'ui.router',
-//  'angular-storage'
 ])
   .controller('UsersController', UsersController)
   .factory('User', function() {
-    return { isLoggedIn: false };
+    return {
+      isLoggedIn: false,
+      currentUser: {},
+      userForLogin: {}
+    };
   })
   .run(['$rootScope','$state','User', function($rootScope, $state, User) {
     $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
@@ -21,4 +24,17 @@ angular.module('FeedBeacon',[
     })
   }]);
 
+
+  // .service(['User', '$http', function() {
+  //   service = this;
+  //
+  //   service.authenticate = function($http) {
+  //     $http({
+  //       method: 'GET',
+  //       url: 'http://localhost:3000/auth'
+  //     }).then( (response) => {
+  //       return response
+  //     })
+  //   }
+  // }])
   UsersController.$inject = ['$rootScope','$state','$http','User'];

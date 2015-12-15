@@ -19,7 +19,7 @@ router.route('/user/new')
 router.use( (req, res, next) => {
   console.log('verifying token');
 
-  let token = req.headers.authorization;
+  let token = req.headers.Authorization;
 
   //decode token
   if (token) {
