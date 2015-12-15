@@ -50,11 +50,15 @@ function UsersController($rootScope, $state, $http, User) {
     });
   }
 
-    self.getCurrentUserLikes = function() {
-      console.log('Getting current user');
-      return User.currentUser.foodTypes;
-    }
+  self.getCurrentUserLikes = function() {
+    console.log('Getting current user');
+    return User.currentUser.foodTypes;
+  }
 
+  self.newLike = function(like) {
+    console.log('appending list of current user likes');
+    User.currentUser.foodTypes.push(like);
+  }
 
     self.updateUser = function() {
       console.log('updating user');

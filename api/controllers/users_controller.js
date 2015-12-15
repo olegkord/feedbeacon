@@ -29,7 +29,7 @@ function newUser(req,res) {
 
   user.save( (error) => {
     if (error) res.json({message: 'Could not create new user because of:' + error});
-    debugger;
+
     res.json(user);
   });
 }
@@ -47,7 +47,7 @@ function loginUser(req, res) {
        res.status(500).json({message: "user not found"})
     }
     else {
-    debugger;
+    
     user.authenticate(userParams.password, (error, isMatch) => {
 
       if (error) throw error;
@@ -55,7 +55,7 @@ function loginUser(req, res) {
       if (isMatch) {
         let token = jwt.sign(user, secret, {expiresIn: 1444000});
 //NOT RETURNING RIGHT USER
-        debugger;
+
         res.json({
           success: true,
           message: 'Authorization successful',

@@ -8,12 +8,13 @@
     &nbsp;
   </span>
   <div class="row">
-    <div class="input-field col s2">
-      <span><input id="profile.newFood" type="text" class="validate">
+    <span><div class="input-field col s2">
+      <input ng-model="like" type="text" class="validate">
       <label class="active" for="profile.newFood">New Like</label>
-      <a type="submit" class="btn waves-effect waves-light" name="action">
+      <button ng-click="profile.newLike(like)" type="submit" class="btn waves-effect waves-light" name="action">
         add
-      </a></span>
+      </button>
+    </span>
     </div>
   </div>
 </div>
