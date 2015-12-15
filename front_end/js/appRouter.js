@@ -15,6 +15,9 @@ angular.module('FeedBeacon')
         url: '/signup/user',
         templateUrl: 'js/templates/signupUser.html'
       })
+      .state('signout', {
+        url: '/signout/user'
+      })
       .state('signup_restaurant', {
         url: '/signup/restaurant',
         templateUrl: 'js/templates/signupRestaurant.html'
