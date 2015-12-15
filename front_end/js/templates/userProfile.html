@@ -3,7 +3,7 @@
   <span ng-repeat="food in profile.getCurrentUserLikes() track by $index">
     <div class="chip">
       {{food}}
-      <i class="material-icons">close</i>
+      <i ng-click="profile.removeLike($event,food)">X</i>
     </div>
     &nbsp;
   </span>

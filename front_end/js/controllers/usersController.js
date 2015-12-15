@@ -51,7 +51,6 @@ function UsersController($rootScope, $state, $http, User) {
   }
 
   self.getCurrentUserLikes = function() {
-    console.log('Getting current user');
     return User.currentUser.foodTypes;
   }
 
@@ -62,13 +61,34 @@ function UsersController($rootScope, $state, $http, User) {
     //update database user object with the new like
     $http({
       method: 'PUT',
-      url: 'http://localhost:3000/user/'+User.currentUser._id,
+      url: 'http://localhost:3000/user/' + User.currentUser._id,
       data: {newLike: like},
       headers: {'Content-Type': 'application/json'}
     }).then( (user) => {
+      User.currentUser.foodTypes = user.data.foodTypes;
       console.log('user updated!');
     });
-  }
+   }
+
+   self.removeLike = function($event, food) {
+     console.log('removing like');
+     $event.preventDefault();
+    //  let index = User.currentUser.foodTypes.indexOf(food);
+    //  User.currentUser.foodTypes.splice(index,1);
+     $http({
+       method: 'PUT',
+       url: 'http://localhost:3000/user/' + User.currentUser._id,
+       data: {pullFood: food},
+       headers: {'Content-Type': 'application/json'}
+     }).then( (user) => {
+       User.currentUser.foodTypes = user.data.foodTypes;
+       console.log('user updated');
+       $state.go('user_show');
+     })
+
+   }
+
+
 
     self.updateUser = function() {
       console.log('updating user');

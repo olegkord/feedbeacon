@@ -76,16 +76,30 @@ function updateUser(req, res) {
   debugger;
   let userID = req.params.id;
   let newLike = req.body.newLike;
+  let pullFood = req.body.pullFood;
+  if (pullFood) {
+    User.findByIdAndUpdate(
+      userID,
+      {$pull: {foodTypes: pullFood}},
+      {new: true},
+      (error, user) => {
+        if(error) res.status(400).send({message: error.errmsg});
 
-  User.findByIdAndUpdate(
-    userID,
-    {$push: {foodTypes: newLike}},
-    {new: true},
-    (error, user) => {
-      if(error) res.status(400).send({message: error.errmsg});
+        else return res.status(202).json(user);
+      });
+    }
 
-      else return res.status(202).json(user);
-    });
+  else if (newLike) {
+    User.findByIdAndUpdate(
+      userID,
+      {$push: {foodTypes: newLike}},
+      {new: true},
+      (error, user) => {
+        if(error) res.status(400).send({message: error.errmsg});
+
+        else return res.status(202).json(user);
+      })
+    };
   }
 
 
