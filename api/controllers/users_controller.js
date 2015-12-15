@@ -25,12 +25,11 @@ function getAll(req,res) {
 function newUser(req,res) {
   console.log('hit create new user route');
 
-  let user = new User();
-  
-  debugger;
+  let user = new User(req.body);
+
   user.save( (error) => {
     if (error) res.json({message: 'Could not create new user because of:' + error});
-
+    debugger;
     res.json(user);
   });
 }
@@ -41,8 +40,14 @@ function loginUser(req, res) {
 
   User.findOne({email: userParams.email}, (err,user) => {
 
-    if (err) throw err;
-
+    if (err) {
+       throw err;
+    }
+    else if (!user) {
+       res.status(500).json({message: "user not found"})
+    }
+    else {
+    debugger;
     user.authenticate(userParams.password, (error, isMatch) => {
 
       if (error) throw error;
@@ -62,6 +67,7 @@ function loginUser(req, res) {
         return res.status(401).send({message: 'unauthorized access'})
       }
     });
+  }
   });
 }
 
