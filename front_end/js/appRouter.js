@@ -1,10 +1,10 @@
 angular.module('FeedBeacon')
   .config(AppRouter);
 
-  function AppRouter($stateProvider, $urlRouterProvider) {
-
+  function AppRouter($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $urlRouterProvider.otherwise("/home")
+    //$httpProvider.interceptors.push('APIInterceptor');
 
     $stateProvider
       .state('home', {
@@ -30,10 +30,7 @@ angular.module('FeedBeacon')
       .state('user_show', {
         url: '/user/:id',
         templateUrl: 'js/templates/userProfile.html',
-        resolve: {
-          testFcn: function() {
-            return {value: 'simple!'}
-          }
-        }
+        data: {requiresLogin: true}
       })
-  }
+    }
+  

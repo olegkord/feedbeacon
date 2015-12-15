@@ -2,40 +2,50 @@
 
   console.log('usercontroller loaded!');
 
-  function UsersController($http,$state,$rootScope) {
+  function UsersController($rootScope, $state, $http, User) {
 
     let self = this;
 
+
     self.all = [];
 
-    self.newUser = {}
-    self.logInUser = {}
+    self.newUser = {};
+    self.logInUser = {};
+    self.currentUser = {};
     //self.updateUser = updateUser;
     //self.deleteUser = deleteUser;
 
 //class methods:
-  self.signIn = function() {
-     if(!self.currentUser){
-       console.log('logging in user!');
-       $http({
-         method: 'POST',
-         url: 'http://localhost:3000/user/login',
-         data: self.logInUser,
-         headers: {'Content-Type': 'application/json'}
-       }).then( (data) => {
-         self.currentUser = data.data.user;
-         $http.defaults.headers.common.authorization = data.data.token;
-         $rootScope.currentUser = data.data.user;
-         $state.go('user_show', {id: data.data.user._id});
-       })
-     }
-     else {
-       alert('You are already signed in!');
-     }
+  self.signIn = function(user) {
+    // LoginService.login(user)
+    //   .then( (response) => {
+    //     user.access_token = response.data.id;
+    //     self.currentUser = user
+    //   });
+
+
+     console.log('logging in user!');
+     $http({
+       method: 'POST',
+       url: 'http://localhost:3000/user/login',
+       data: self.logInUser,
+       headers: {'Content-Type': 'application/json'}
+     }).then( (data) => {
+       User.isLoggedIn = true;
+      //  self.currentUser = data.data.user;
+      //  $http.defaults.headers.common.authorization = data.data.token;
+      //  $rootScope.currentUser = data.data.user;
+       $state.go('user_show', {id: data.data.user._id});
+     })
+
    },
 
-    self.addUser = function() {
+    self.addUser = function(user) {
       console.log('adding a user!');
+      // LoginService.register(user)
+      //   .then( (response) => {
+      //     login(user);
+      //   });
       self.newUser.foodTypes.split(',');
       $http({
         method: 'POST',
