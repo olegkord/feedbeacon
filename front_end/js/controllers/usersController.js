@@ -58,6 +58,14 @@ function UsersController($rootScope, $state, $http, User) {
   self.newLike = function(like) {
     console.log('appending list of current user likes');
     User.currentUser.foodTypes.push(like);
+
+    //update database user object with the new like
+    $http({
+      method: 'PUT',
+      url: 'http://localhost:3000/user/'+User.currentUser._id,
+      data: {newLike: like},
+      headers: {'Content-Type': 'application/json'}
+    });
   }
 
     self.updateUser = function() {

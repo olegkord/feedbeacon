@@ -21,6 +21,10 @@ function getAll(req,res) {
   });
 }
 
+function auth(req,res) {
+  console.log('Authenticating user HTTP header token');
+  return res.status(200).send({message:'Token OK'});
+}
 //Post
 function newUser(req,res) {
   console.log('hit create new user route');
@@ -37,9 +41,7 @@ function newUser(req,res) {
 function loginUser(req, res) {
   console.log('hit log in user route');
   let userParams = req.body;
-
   User.findOne({email: userParams.email}, (err,user) => {
-
     if (err) {
        throw err;
     }
@@ -47,14 +49,11 @@ function loginUser(req, res) {
        res.status(500).json({message: "user not found"})
     }
     else {
-    
     user.authenticate(userParams.password, (error, isMatch) => {
-
       if (error) throw error;
 
       if (isMatch) {
         let token = jwt.sign(user, secret, {expiresIn: 1444000});
-//NOT RETURNING RIGHT USER
 
         res.json({
           success: true,
@@ -71,9 +70,9 @@ function loginUser(req, res) {
   });
 }
 
-function auth(req,res) {
-  console.log('Authenticating user HTTP header token');
-  return res.status(200).send({message:'Token OK'});
+//Put
+function updateUser(req, res) {
+  console.log('hit update user route!');
 }
 
 
@@ -82,5 +81,6 @@ module.exports = {
   loginUser: loginUser,
   newUser: newUser,
   auth: auth,
-  getUser: getUser
+  getUser: getUser,
+  updateUser: updateUser
 }

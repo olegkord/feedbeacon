@@ -18,8 +18,8 @@ router.route('/user/new')
 //router middleware for token authentication
 router.use( (req, res, next) => {
   console.log('verifying token');
-
-  let token = req.headers.Authorization;
+  debugger;
+  let token = req.headers.authorization;
 
   //decode token
   if (token) {
@@ -50,5 +50,7 @@ router.route('/user/authenticate')
 
 router.route('/user/:id')
   .get(users_controller.getUser)
+
+  .put(users_controller.updateUser)
 
 module.exports = router;
