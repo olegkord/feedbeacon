@@ -7,7 +7,7 @@ let userSchema = new mongoose.Schema({
   userName: String,
   email: String,
   password: String,
-  foodTypes: [String],
+  foodTypes: [],
   created_at: Date,
   updated_at: Date
 });
@@ -30,7 +30,6 @@ debugger;
 });
 
 userSchema.methods.authenticate = function(password,callback) {
-  debugger;
   bcrypt.compare(password, this.password, (err, isMatch) => {
     callback(null, isMatch);
   });

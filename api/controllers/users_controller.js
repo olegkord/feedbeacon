@@ -25,8 +25,9 @@ function getAll(req,res) {
 function newUser(req,res) {
   console.log('hit create new user route');
 
-  let user = new User(req.body);
-
+  let user = new User();
+  
+  debugger;
   user.save( (error) => {
     if (error) res.json({message: 'Could not create new user because of:' + error});
 
@@ -43,17 +44,17 @@ function loginUser(req, res) {
     if (err) throw err;
 
     user.authenticate(userParams.password, (error, isMatch) => {
-      debugger;
+
       if (error) throw error;
 
-      debugger;
       if (isMatch) {
         let token = jwt.sign(user, secret, {expiresIn: 1444000});
+//NOT RETURNING RIGHT USER
         debugger;
         res.json({
           success: true,
           message: 'Authorization successful',
-          user: user,
+          user: user._doc,
           token: token
         });
       }

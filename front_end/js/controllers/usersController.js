@@ -39,7 +39,7 @@ function UsersController($rootScope, $state, $http, User) {
 
   self.addUser = function(user) {
     console.log('adding a user!');
-    self.newUser.foodTypes.split(',');
+    self.newUser.foodTypes = self.newUser.foodTypes.split(', ');
     $http({
       method: 'POST',
       url: 'http://localhost:3000/user/new',
@@ -50,10 +50,11 @@ function UsersController($rootScope, $state, $http, User) {
     });
   }
 
-    self.getCurrentUser = function() {
+    self.getCurrentUserLikes = function() {
       console.log('Getting current user');
-      return User.currentUser;
+      return User.currentUser.foodTypes;
     }
+
 
     self.updateUser = function() {
       console.log('updating user');

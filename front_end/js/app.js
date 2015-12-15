@@ -5,6 +5,9 @@ angular.module('FeedBeacon',[
 ])
   .controller('UsersController', UsersController)
   .factory('User', function() {
+    //include private variables here!!!
+
+    /// IMPORTANT!
     return {
       isLoggedIn: false,
       currentUser: {},
