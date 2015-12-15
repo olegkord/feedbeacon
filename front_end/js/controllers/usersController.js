@@ -6,13 +6,10 @@ function UsersController($rootScope, $state, $http, User) {
 
   let self = this;
 
-
-  self.all = [];
-
   self.newUser = {};
   self.logInUser = {};
 
-//class methods:
+//class methods
   self.signIn = function() {
     console.log('logging in user!');
     if (Object.keys(self.logInUser)) {
@@ -40,8 +37,6 @@ function UsersController($rootScope, $state, $http, User) {
     $state.go('home');
   }
 
-
-
   self.addUser = function(user) {
     console.log('adding a user!');
     self.newUser.foodTypes.split(',');
@@ -55,8 +50,9 @@ function UsersController($rootScope, $state, $http, User) {
     });
   }
 
-    self.getUsers = function() {
-
+    self.getCurrentUser = function() {
+      console.log('Getting current user');
+      return User.currentUser;
     }
 
     self.updateUser = function() {
