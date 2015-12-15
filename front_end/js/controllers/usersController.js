@@ -65,6 +65,8 @@ function UsersController($rootScope, $state, $http, User) {
       url: 'http://localhost:3000/user/'+User.currentUser._id,
       data: {newLike: like},
       headers: {'Content-Type': 'application/json'}
+    }).then( (user) => {
+      console.log('user updated!');
     });
   }
 

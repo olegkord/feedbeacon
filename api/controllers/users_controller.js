@@ -73,7 +73,20 @@ function loginUser(req, res) {
 //Put
 function updateUser(req, res) {
   console.log('hit update user route!');
-}
+  debugger;
+  let userID = req.params.id;
+  let newLike = req.body.newLike;
+
+  User.findByIdAndUpdate(
+    userID,
+    {$push: {foodTypes: newLike}},
+    {new: true},
+    (error, user) => {
+      if(error) res.status(400).send({message: error.errmsg});
+
+      else return res.status(202).json(user);
+    });
+  }
 
 
 module.exports = {
