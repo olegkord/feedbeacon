@@ -36,6 +36,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //end logging
 
 app.use(userRoutes);
+app.use(restoRoutes);
 //perhaps add static dependencies here:
 //end static dependencies
 
