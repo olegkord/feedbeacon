@@ -1,6 +1,6 @@
 'use strict';
 
-let Restaurant = require('../models/user');
+let Restaurant = require('../models/restaurant');
 
 const expressJwt = require('express-jwt');
 const jwt = require('jsonwebtoken');
@@ -8,57 +8,56 @@ const secret = 'posholnahuisuka';
 
 //GET
 function getRestaurant(req,res) {
-  console.log('getting a user')
+  console.log('getting a restaurant')
 
 }
 
 function getAll(req,res) {
-  console.log('hit get all users route');
-  Restaurant.find( (error,users) => {
-    if (error) response.json({message: 'No users found. error.'});
+  console.log('hit get all restaurants route');
+  Restaurant.find( (error,restaurants) => {
+    if (error) response.json({message: 'No restaurants found. error.'});
 
-    res.json(users)
+    res.json(restaurants)
   });
 }
 
 function auth(req,res) {
-  console.log('Authenticating user HTTP header token');
+  console.log('Authenticating restaurant HTTP header token');
   return res.status(200).send({message:'Token OK'});
 }
 //Post
 function newRestaurant(req,res) {
-  console.log('hit create new user route');
+  console.log('hit create new restaurant route');
 
-  let user = new Restaurant(req.body);
+  let restaurant = new Restaurant(req.body);
 
-  user.save( (error) => {
-    if (error) res.json({message: 'Could not create new user because of:' + error});
+  restaurant.save( (error) => {
+    if (error) res.json({message: 'Could not create new restaurant because of:' + error});
 
-    res.json(user);
+    res.json(restaurant);
   });
 }
 
 function loginRestaurant(req, res) {
-  console.log('hit log in user route');
-  let userParams = req.body;
-  Restaurant.findOne({email: userParams.email}, (err,user) => {
+  console.log('hit log in restaurant route');
+  let restaurantParams = req.body;
+  Restaurant.findOne({email: restaurantParams.email}, (err,restaurant) => {
     if (err) {
        throw err;
     }
-    else if (!user) {
-       res.status(500).json({message: "user not found"})
+    else if (!restaurant) {
+       res.status(500).json({message: "restaurant not found"})
     }
     else {
-    user.authenticate(userParams.password, (error, isMatch) => {
+    restaurant.authenticate(restaurantParams.password, (error, isMatch) => {
       if (error) throw error;
 
       if (isMatch) {
-        let token = jwt.sign(user, secret, {expiresIn: 1444000});
-
+        let token = jwt.sign(restaurant, secret, {expiresIn: 1444000});
         res.json({
           success: true,
           message: 'Authorization successful',
-          user: user._doc,
+          restaurant: restaurant._doc,
           token: token
         });
       }
@@ -72,32 +71,34 @@ function loginRestaurant(req, res) {
 
 //Put
 function updateRestaurant(req, res) {
-  console.log('hit update user route!');
-  debugger;
-  let userID = req.params.id;
-  let newLike = req.body.newLike;
-  let pullFood = req.body.pullFood;
-  if (pullFood) {
+  console.log('hit update restaurant route!');
+  //this will update restaurant tags:
+
+  let restaurantId = req.params.id;
+  let newTag = req.body.newTag;
+  let pullTag = req.body.pullTag;
+
+  if (pullTag) {
     Restaurant.findByIdAndUpdate(
-      userID,
-      {$pull: {foodTypes: pullFood}},
+      restaurantID,
+      {$pull: {foodTypes: pullTag}},
       {new: true},
-      (error, user) => {
+      (error, restaurant) => {
         if(error) res.status(400).send({message: error.errmsg});
 
-        else return res.status(202).json(user);
+        else return res.status(202).json(restaurant);
       });
     }
 
-  else if (newLike) {
+  else if (newTag) {
     Restaurant.findByIdAndUpdate(
-      userID,
-      {$push: {foodTypes: newLike}},
+      restaurantID,
+      {$push: {foodTypes: newTag}},
       {new: true},
-      (error, user) => {
+      (error, restaurant) => {
         if(error) res.status(400).send({message: error.errmsg});
 
-        else return res.status(202).json(user);
+        else return res.status(202).json(restaurant);
       })
     };
   }

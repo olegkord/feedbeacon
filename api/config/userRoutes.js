@@ -15,6 +15,15 @@ router.route('/user/login')
 router.route('/user/new')
   .post(users_controller.newUser);
 
+let restaurants_controller = require('../controllers/restaurants_controller');
+
+router.route('/restaurant/login')
+  .post(restaurants_controller.loginRestaurant);
+
+router.route('/restaurant/new')
+  .post(restaurants_controller.newRestaurant);
+
+
 //router middleware for token authentication
 router.use( (req, res, next) => {
   console.log('verifying token');

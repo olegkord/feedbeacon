@@ -4,7 +4,7 @@ angular.module('FeedBeacon',[
   'ui.router',
 ])
   .controller('UsersController', UsersController)
-  .controller('RestaurantController', RestaurantController)
+  .controller('RestaurantsController', RestaurantsController)
   .factory('User', function() {
     //include private variables here!!!
 
@@ -40,5 +40,5 @@ angular.module('FeedBeacon',[
   }]);
 
   UsersController.$inject = ['$rootScope','$state','$http','User', 'Socket'];
-  RestaurantController.$inject = ['$rootScope', '$state', '$http', 'Restaurant', 'Socket']
+  RestaurantsController.$inject = ['$rootScope', '$state', '$http', 'Restaurant', 'Socket']
   Socket.$inject = ['$rootScope']
