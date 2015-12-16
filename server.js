@@ -35,6 +35,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 //end logging
 
+app.get('/', (req,res) => {
+  res.send('server is running!');
+})
+
 app.use(userRoutes);
 app.use(restoRoutes);
 //perhaps add static dependencies here:
