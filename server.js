@@ -39,6 +39,10 @@ app.get('/', (req,res) => {
   res.send('server is running!');
 })
 
+app.get('/favicon.ico', (req,res) => {
+  res.send('here is your dumbass favicon');
+})
+
 app.use(userRoutes);
 app.use(restoRoutes);
 //perhaps add static dependencies here:
