@@ -19,21 +19,26 @@ angular.module('FeedBeacon')
         url: '/signout/user',
         templateUrl: 'js/templates/home.html'
       })
-      .state('signup_restaurant', {
-        url: '/signup/restaurant',
-        templateUrl: 'js/templates/signupRestaurant.html'
+      .state('user_show', {
+        url: '/user/:id',
+        templateUrl: 'js/templates/userProfile.html',
+        data: {requiresLogin: true}
       })
       .state('login', {
         url: '/login/user',
         templateUrl: 'js/templates/loginUser.html',
       })
+      .state('signup_restaurant', {
+        url: '/signup/restaurant',
+        templateUrl: 'js/templates/signupRestaurant.html'
+      })
       .state('login_restaurant', {
         url: '/login/restaurant',
         templateUrl: 'js/templates/loginRestaurant.html'
       })
-      .state('user_show', {
-        url: '/user/:id',
-        templateUrl: 'js/templates/userProfile.html',
+      .state('restaurant_show', {
+        url: '/restaurant/:id',
+        templateUrl: 'js/templates/restaurantProfiles.html',
         data: {requiresLogin: true}
       })
     }
