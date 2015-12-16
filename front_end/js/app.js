@@ -4,6 +4,7 @@ angular.module('FeedBeacon',[
   'ui.router',
 ])
   .controller('UsersController', UsersController)
+  .controller('RestaurantController', RestaurantController)
   .factory('User', function() {
     //include private variables here!!!
 
@@ -13,6 +14,16 @@ angular.module('FeedBeacon',[
       currentUser: {},
       userForLogin: {}
     };
+  })
+  .factory('Restaurant', function() {
+    //local variables here
+
+    //
+    return {
+      isLoggedIn: false,
+      currentRestoUser: {},
+      restoUserForLogin: {}
+    }
   })
   .factory('Socket', Socket)
   .run(['$rootScope','$state','User', function($rootScope, $state, User) {
@@ -29,4 +40,5 @@ angular.module('FeedBeacon',[
   }]);
 
   UsersController.$inject = ['$rootScope','$state','$http','User', 'Socket'];
+  RestaurantController.$inject = ['$rootScope', '$state', '$http', 'Restaurant', 'Socket']
   Socket.$inject = ['$rootScope']
