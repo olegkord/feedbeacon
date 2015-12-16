@@ -9,6 +9,10 @@ function UsersController($rootScope, $state, $http, User) {
   self.newUser = {};
   self.logInUser = {};
 
+  //objects for user profile instance:
+  self.likes = [];
+  self.needs = [];
+
 //class methods
   self.signIn = function() {
     console.log('logging in user!');
@@ -73,8 +77,7 @@ function UsersController($rootScope, $state, $http, User) {
    self.removeLike = function($event, food) {
      console.log('removing like');
      $event.preventDefault();
-    //  let index = User.currentUser.foodTypes.indexOf(food);
-    //  User.currentUser.foodTypes.splice(index,1);
+
      $http({
        method: 'PUT',
        url: 'http://localhost:3000/user/' + User.currentUser._id,
@@ -85,7 +88,16 @@ function UsersController($rootScope, $state, $http, User) {
        console.log('user updated');
        $state.go('user_show');
      })
+   }
 
+   self.addNeed = function($event, food) {
+     console.log('moving like to need');
+      let index = User.currentUser.foodTypes.indexOf(food);
+      self.needs.push(User.currentUser.foodTypes.splice(index,1));
+   }
+
+   self.removeNeed = function($event, food) {
+     console.log('removing need');
    }
 
 
