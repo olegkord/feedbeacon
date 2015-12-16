@@ -26,15 +26,28 @@ angular.module('FeedBeacon',[
     }
   })
   .factory('Socket', Socket)
-  .run(['$rootScope','$state','User', function($rootScope, $state, User) {
+  .run(['$rootScope','$state','User', 'Restaurant', function($rootScope, $state, User, Restaurant) {
     $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
-      let isAuthenticationRequired = toState.data
-        && toState.data.requiresLogin
-        && !User.isLoggedIn;
 
-      if (isAuthenticationRequired) {
-        event.preventDefault();
-        $state.go('login')
+      if(Object.keys(User.currentUser).length != 0) {
+        let isAuthenticationRequired = toState.data
+          && toState.data.requiresLogin
+          && !User.isLoggedIn;
+
+        if (isAuthenticationRequired) {
+          event.preventDefault();
+          $state.go('login');
+        }
+      }
+      else if(Object.keys(Restaurant.currentRestoUser).length != 0) {
+        let isAuthenticationRequired = toState.data
+          && toState.data.requiresLogin
+          && !Restaurant.isLoggedIn;
+
+        if (isAuthenticationRequired) {
+          event.preventDefault();
+          $state.go('login_restaurant');
+        }
       }
     })
   }]);

@@ -38,7 +38,7 @@ angular.module('FeedBeacon')
       })
       .state('restaurant_show', {
         url: '/restaurant/:id',
-        templateUrl: 'js/templates/restaurantProfiles.html',
+        templateUrl: 'js/templates/restaurantProfile.html',
         data: {requiresLogin: true}
       })
     }
