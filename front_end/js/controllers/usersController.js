@@ -77,6 +77,7 @@ function UsersController($rootScope, $state, $http, User) {
    self.removeLike = function($event, food) {
      console.log('removing like');
      $event.preventDefault();
+     $event.stopPropagation();
 
      $http({
        method: 'PUT',
@@ -86,7 +87,6 @@ function UsersController($rootScope, $state, $http, User) {
      }).then( (user) => {
        User.currentUser.foodTypes = user.data.foodTypes;
        console.log('user updated');
-       $state.go('user_show');
      })
    }
 
