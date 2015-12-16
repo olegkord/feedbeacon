@@ -34,4 +34,9 @@ function RestaurantsController($rootScope, $state, $http, User, Socket) {
     $state.go('home');
   }
 
+  self.addRestoUser = function(user) {
+    //These fields will depend on the required data inputs for restaurant.
+
+  }
+
 }

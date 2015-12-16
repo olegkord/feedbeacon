@@ -22,7 +22,8 @@ db.once('open', (callback) => {
 
 
 //set up back end routes:
-let routes = require('./config/routes');
+let userRoutes = require('./config/userRoutes');
+let restoRoutes = require('./config/restoRoutes');
 //end routes
 
 // app.use('/user', user);
@@ -34,7 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 //end logging
 
-app.use(routes);
+app.use(userRoutes);
 //perhaps add static dependencies here:
 //end static dependencies
 

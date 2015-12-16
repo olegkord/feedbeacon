@@ -1,20 +1,20 @@
 'use strict';
 
-let User = require('../models/user');
+let Restaurant = require('../models/user');
 
 const expressJwt = require('express-jwt');
 const jwt = require('jsonwebtoken');
 const secret = 'posholnahuisuka';
 
 //GET
-function getUser(req,res) {
+function getRestaurant(req,res) {
   console.log('getting a user')
 
 }
 
 function getAll(req,res) {
   console.log('hit get all users route');
-  User.find( (error,users) => {
+  Restaurant.find( (error,users) => {
     if (error) response.json({message: 'No users found. error.'});
 
     res.json(users)
@@ -26,10 +26,10 @@ function auth(req,res) {
   return res.status(200).send({message:'Token OK'});
 }
 //Post
-function newUser(req,res) {
+function newRestaurant(req,res) {
   console.log('hit create new user route');
 
-  let user = new User(req.body);
+  let user = new Restaurant(req.body);
 
   user.save( (error) => {
     if (error) res.json({message: 'Could not create new user because of:' + error});
@@ -38,10 +38,10 @@ function newUser(req,res) {
   });
 }
 
-function loginUser(req, res) {
+function loginRestaurant(req, res) {
   console.log('hit log in user route');
   let userParams = req.body;
-  User.findOne({email: userParams.email}, (err,user) => {
+  Restaurant.findOne({email: userParams.email}, (err,user) => {
     if (err) {
        throw err;
     }
@@ -71,14 +71,14 @@ function loginUser(req, res) {
 }
 
 //Put
-function updateUser(req, res) {
+function updateRestaurant(req, res) {
   console.log('hit update user route!');
   debugger;
   let userID = req.params.id;
   let newLike = req.body.newLike;
   let pullFood = req.body.pullFood;
   if (pullFood) {
-    User.findByIdAndUpdate(
+    Restaurant.findByIdAndUpdate(
       userID,
       {$pull: {foodTypes: pullFood}},
       {new: true},
@@ -90,7 +90,7 @@ function updateUser(req, res) {
     }
 
   else if (newLike) {
-    User.findByIdAndUpdate(
+    Restaurant.findByIdAndUpdate(
       userID,
       {$push: {foodTypes: newLike}},
       {new: true},
@@ -105,9 +105,9 @@ function updateUser(req, res) {
 
 module.exports = {
   getAll: getAll,
-  loginUser: loginUser,
-  newUser: newUser,
+  loginRestaurant: loginRestaurant,
+  newRestaurant: newRestaurant,
   auth: auth,
-  getUser: getUser,
-  updateUser: updateUser
+  getRestaurant: getRestaurant,
+  updateRestaurant: updateRestaurant
 }
