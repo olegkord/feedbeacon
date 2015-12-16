@@ -2,7 +2,7 @@
 
 console.log('usercontroller loaded!');
 
-function UsersController($rootScope, $state, $http, User) {
+function UsersController($rootScope, $state, $http, User, Socket) {
 
   let self = this;
 
@@ -98,8 +98,9 @@ function UsersController($rootScope, $state, $http, User) {
 
    self.removeNeed = function($event, food) {
      console.log('removing need');
+     let index = User.currentUser.foodTypes.indexOf(food);
+     self.needs.splice(index,1);
    }
-
 
 
     self.updateUser = function() {
@@ -110,4 +111,7 @@ function UsersController($rootScope, $state, $http, User) {
       console.log('deleting a user');
     }
 
+    self.sendRequest = function(needs) {
+      Socket.emit('user request', {needs: needs})
+    }
   }

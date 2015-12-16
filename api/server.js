@@ -41,3 +41,13 @@ app.use(routes);
 let server = app.listen(3000, () => {
   console.log('server running');
 })
+
+let io = require('socket.io')(server);
+
+//////SERVER SIDE SOCKET EVENTS:
+io.on('connection', (client) => {
+
+  client.on('user request', (data) => {
+    console.log('USER REQUEST RECEIVED!');
+  })
+})

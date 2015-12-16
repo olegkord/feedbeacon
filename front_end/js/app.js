@@ -14,6 +14,7 @@ angular.module('FeedBeacon',[
       userForLogin: {}
     };
   })
+  .factory('Socket', Socket)
   .run(['$rootScope','$state','User', function($rootScope, $state, User) {
     $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
       let isAuthenticationRequired = toState.data
@@ -27,4 +28,5 @@ angular.module('FeedBeacon',[
     })
   }]);
 
-  UsersController.$inject = ['$rootScope','$state','$http','User'];
+  UsersController.$inject = ['$rootScope','$state','$http','User', 'Socket'];
+  Socket.$inject = ['$rootScope']
