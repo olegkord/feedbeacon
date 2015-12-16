@@ -10,7 +10,7 @@ let app = express();
 
 //noSQL database:
 let mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/feedbeacon');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/feedbeacon');
 
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -40,7 +40,7 @@ app.use(restoRoutes);
 //perhaps add static dependencies here:
 //end static dependencies
 
-let server = app.listen(3000, () => {
+let server = app.listen(process.env.PORT || 3000, () => {
   console.log('server running');
 })
 
