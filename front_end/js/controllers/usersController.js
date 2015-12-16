@@ -30,7 +30,7 @@ function UsersController($rootScope, $state, $http, User, Socket) {
       $http.defaults.headers.common.Authorization = data.data.token;
       $state.go('user_show', {id: data.data.user._id});
     })
-  },
+  }
 
   self.signOut = function(user) {
     console.log('logging out user!');
