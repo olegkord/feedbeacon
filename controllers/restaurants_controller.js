@@ -79,11 +79,13 @@ function updateRestaurant(req, res) {
   let pullTag = req.body.pullTag;
 
   if (pullTag) {
+    debugger;
     Restaurant.findByIdAndUpdate(
-      restaurantID,
+      restaurantId,
       {$pull: {foodTypes: pullTag}},
       {new: true},
       (error, restaurant) => {
+        debugger;
         if(error) res.status(400).send({message: error.errmsg});
 
         else return res.status(202).json(restaurant);
@@ -91,8 +93,9 @@ function updateRestaurant(req, res) {
     }
 
   else if (newTag) {
+    debugger;
     Restaurant.findByIdAndUpdate(
-      restaurantID,
+      restaurantId,
       {$push: {foodTypes: newTag}},
       {new: true},
       (error, restaurant) => {
