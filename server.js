@@ -56,8 +56,8 @@ let io = require('socket.io')(server);
 
 //////SERVER SIDE SOCKET EVENTS:
 io.on('connection', (client) => {
-
+  console.log('CLIENT CONNECTION!');
   client.on('user request', (data) => {
-    console.log('USER REQUEST RECEIVED!');
+    io.broadcast.emit('reservation', {thing: "here is some stuff"});
   })
 })
