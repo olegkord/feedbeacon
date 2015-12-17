@@ -58,6 +58,7 @@ let io = require('socket.io')(server);
 io.on('connection', (client) => {
   console.log('CLIENT CONNECTION!');
   client.on('user request', (data) => {
-    io.emit('reservation', {thing: "here is some stuff"});
+    console.log('user request!');
+    io.emit('reservation', data);
   })
 })
